@@ -93,6 +93,24 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
+app.get("/generate-pdf", (req, res) => {
+  // Create a PDF document
+  const pdfDoc = new PDFDocument();
+
+  // Pipe the PDF to the response
+  pdfDoc.pipe(res);
+
+  // Add content to the PDF (you can customize this part)
+  pdfDoc.fontSize(16).text("Hello, this is a sample PDF!");
+
+  // End the PDF stream
+  pdfDoc.end();
+
+  // Set the response headers
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader("Content-Disposition", "inline; filename=sample.pdf");
+});
+
 app.listen(port, () => {
   console.log("backend listening on port : " + port);
 });
