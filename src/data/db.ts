@@ -19,8 +19,16 @@
 
 import { MongoClient } from "mongodb";
 const DB_NAME = "Poodi-Sabji-dot-com";
-const uri = `mongodb://0.0.0.0:27017/${DB_NAME}`; // Replace with your connection string
-const client = new MongoClient(uri, {});
+let uri = `mongodb://0.0.0.0:27017/${DB_NAME}`;
+if (process.env.NODE_ENV != "development" || true) {
+  uri =
+    "mongodb+srv://suditya:Suditya%40123@poodisabjidotcom.jjmenhc.mongodb.net/?retryWrites=true&w=majority&appName=PoodiSabjiDotCom";
+}
+// console.log(uri);
+const client = new MongoClient(
+  "mongodb+srv://suditya:Suditya%40123@poodisabjidotcom.jjmenhc.mongodb.net/?retryWrites=true&w=majority&appName=PoodiSabjiDotCom",
+  {}
+);
 
 async function connectDB() {
   try {
